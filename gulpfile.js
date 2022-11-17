@@ -10,9 +10,9 @@ function styles() {
 }
 
 function parts () {
-	return src(['./app/parts/head.html', 
-							'./app/parts/body.html', 	
-							'./app/parts/footer.html'])
+	return src(['./app/html/parts/head.html', 
+							'./app/html/parts/body.html', 	
+							'./app/html/parts/footer.html'])
 	.pipe(concat('index.html'))
 	.pipe(dest('./app/html'))
 }
