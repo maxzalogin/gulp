@@ -1,7 +1,21 @@
-const gulp = require('gulp'), sass = require('gulp-sass')(require('sass')); 
+const { src, dest, watch, parallel } = require('gulp');
+const sass = require('gulp-sass')(require('sass'));
+const concat = require('gulp-concat');
 
-gulp.task('sass', function(){ // Создаем таск "sass"
-	return gulp.src('app/sass/*.sass') // Берем источник
-		.pipe(sass()) // Преобразуем Sass в CSS посредством gulp-sass
-		.pipe(gulp.dest('app/css')) // Выгружаем результата в папку app/css
-});
+function styles() {
+	return src('./app/sass/*.sass')
+	.pipe(sass())
+	.pipe(concat('main.css'))
+	.pipe(dest('./app/css'))
+}
+
+function parts () {
+	return src(['./app/parts/head.html', 
+							'./app/parts/body.html', 	
+							'./app/parts/footer.html'])
+	.pipe(concat('index.html'))
+	.pipe(dest('./app/html'))
+}
+
+exports.styles =  styles;
+exports.parts = parts;
